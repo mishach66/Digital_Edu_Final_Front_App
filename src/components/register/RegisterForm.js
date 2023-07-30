@@ -5,6 +5,9 @@ import { registerValidationSchema } from "./RegisterFormValidation";
 import { FormContainer, Button, Input } from "../atoms";
 import { useDispatch } from "react-redux";
 import { authenticateUser } from "../../redux";
+import { useNavigate } from "react-router-dom";
+import { useAlert } from "../../hooks";
+import { Alert } from "../atoms";
 
 export const RegisterForm = () => {
   const {
@@ -16,11 +19,22 @@ export const RegisterForm = () => {
     mode: "onChange",
   });
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { showAlert, alertState, handleClose } = useAlert();
 
   const onSubmit = (data) => {
     console.log("DATA", data)
     dispatch(authenticateUser({formValues: data}))
+      .unwrap()
+      .then(() => {
+      navigate('/')
+      showAlert('წარმატებული ოპერაცია', 'success')
+    })
+    .catch((error) => {
+      console.log('error-ი', error)
+      showAlert(error, 'error');
+    });
   }
 
   return (
@@ -97,6 +111,7 @@ export const RegisterForm = () => {
           );
         }}
       />
+      <Alert handleClose={handleClose} {...alertState} />
       <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
     </FormContainer>
   );

@@ -1,7 +1,10 @@
 import React from 'react'
+import { HomePageProduct } from '../components/products/homepage'
 
 export const Homepage = () => {
     return (
-        <div>Homepage</div>
+        <HomePageProduct>
+            
+        </HomePageProduct>
     )
 }

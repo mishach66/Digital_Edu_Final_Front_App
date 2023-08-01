@@ -2,4 +2,4 @@
 export { userReducer, authenticateUser } from "./userSlice";
 
 // product slice
-export { productReducer, saveProduct } from "./productslice";
+export { productReducer, saveProduct, fetchHomePageProducts } from "./productslice";

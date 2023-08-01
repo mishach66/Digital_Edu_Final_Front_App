@@ -1,2 +1,2 @@
 export {axiosInstance} from './axiosInstance'
-export {isUserAdmin} from './utils'
+export {isUserAdmin, getUserInitials} from './utils'

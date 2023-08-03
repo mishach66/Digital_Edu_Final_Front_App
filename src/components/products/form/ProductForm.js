@@ -1,11 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FormContainer, Button, Input } from "../../atoms";
 import { saveProductValidationSchema } from "./ProductFormValidation";
 import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { saveProduct } from "../../../redux";
+import { useProduct } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 
 export const ProductForm = () => {
@@ -19,8 +20,15 @@ export const ProductForm = () => {
   });
 
   const [image, setImage] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { selectedProduct } = useProduct();
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setImage(selectedProduct.image);
+    }
+  }, [selectedProduct]);
 
   const onSave = (data) => {
     // console.log(data)
@@ -31,29 +39,31 @@ export const ProductForm = () => {
           ...data,
           image,
         },
+        productId: selectedProduct?._id,
       })
     )
-      // .unwrap()
-      // .then(() => {
-      //   navigate("/");
-      // });
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      });
   };
 
   return (
     <FormContainer>
       <Controller
         name="name"
-        defaultValue=""
+        defaultValue={selectedProduct?.name}
         control={control}
         render={({ field }) => {
-          const { name, onChange } = field;
+          const { name, onChange, value } = field;
           return (
             <Input
               name={name}
+              value={value}
               onChange={onChange}
               label="Product name"
               error={!!errors.name}
-              helperText={errors?.name?.message}
+              helperText={errors.name?.message}
             />
           );
         }}
@@ -61,17 +71,18 @@ export const ProductForm = () => {
 
       <Controller
         name="description"
-        defaultValue=""
+        defaultValue={selectedProduct?.description}
         control={control}
         render={({ field }) => {
-          const { name, onChange } = field;
+          const { name, onChange, value } = field;
           return (
             <Input
               name={name}
+              value={value}
               onChange={onChange}
               label="description"
               error={!!errors.description}
-              helperText={errors?.description?.message}
+              helperText={errors.description?.message}
             />
           );
         }}
@@ -79,17 +90,18 @@ export const ProductForm = () => {
 
       <Controller
         name="category"
-        defaultValue=""
+        defaultValue={selectedProduct?.category}
         control={control}
         render={({ field }) => {
-          const { name, onChange } = field;
+          const { name, onChange, value } = field;
           return (
             <Input
               name={name}
+              value={value}
               onChange={onChange}
               label="category"
               error={!!errors.category}
-              helperText={errors?.category?.message}
+              helperText={errors.category?.message}
             />
           );
         }}
@@ -97,17 +109,18 @@ export const ProductForm = () => {
 
       <Controller
         name="brand"
-        defaultValue=""
+        defaultValue={selectedProduct?.brand}
         control={control}
         render={({ field }) => {
-          const { name, onChange } = field;
+          const { name, onChange, value } = field;
           return (
             <Input
               name={name}
+              value={value}
               onChange={onChange}
               label="brand"
               error={!!errors.brand}
-              helperText={errors?.brand?.message}
+              helperText={errors.brand?.message}
             />
           );
         }}
@@ -115,18 +128,19 @@ export const ProductForm = () => {
 
       <Controller
         name="price"
-        defaultValue=""
+        defaultValue={selectedProduct?.price}
         control={control}
         render={({ field }) => {
-          const { name, onChange } = field;
+          const { name, onChange, value } = field;
           return (
             <Input
               name={name}
+              value={value}
               type="number"
               onChange={onChange}
               label="price"
               error={!!errors.price}
-              helperText={errors?.price?.message}
+              helperText={errors.price?.message}
             />
           );
         }}

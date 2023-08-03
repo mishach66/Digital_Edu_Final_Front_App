@@ -1,16 +1,37 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { Homepage, Loginpage, ProductFormPage, Registerpage } from './pages'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { CategoryProductsPage, Homepage, Loginpage, ProductFormPage, Registerpage } from "./pages";
+import { ProtectedRoute, isUserAdmin } from "./helpers";
+import { useUser } from "./hooks";
 
 const RoutesComponent = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/login" element={<Loginpage />} />
-            <Route path="/register" element={<Registerpage />} />
-            <Route path="/products/new" element={<ProductFormPage />} />
-        </Routes>
-    )
-}
+  const { userData } = useUser();
+  const isAdmin = isUserAdmin(userData);
 
-export default RoutesComponent
+  return (
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/login" element={<Loginpage />} />
+      <Route path="/register" element={<Registerpage />} />
+      <Route
+        path="/products/new"
+        element={
+          <ProtectedRoute canAccess={isAdmin}>
+            <ProductFormPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/products/:id/edit"
+        element={
+          <ProtectedRoute canAccess={isAdmin}>
+            <ProductFormPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/products/categories/:categoryName" element={<CategoryProductsPage />} />
+    </Routes>
+  );
+};
+
+export default RoutesComponent;

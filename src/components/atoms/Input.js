@@ -7,10 +7,12 @@ export const Input = ({
     helperText,
     name,
     onChange,
+    value,
 }) => {
     return (
         <TextField
             name={name}
+            value={value}
             onChange={onChange}
             type={type}
             label={label}

@@ -1,8 +1,7 @@
 import React from "react";
-import { Box, styled, AppBar } from "@mui/material";
-import { Toolbar } from "@mui/material";
+import { Box, styled, AppBar, Toolbar } from "@mui/material";
 import { Link } from "../atoms";
-import { UserIcon } from "../header";
+import { ProductCategories, UserIcon } from "../header";
 
 const StyledAppBar = styled(AppBar)(() => ({
   // backgroundColor: "#131921",
@@ -29,6 +28,7 @@ export const Header = () => {
             <UserIcon />
           </Box>
         </StyledToolBar>
+        <ProductCategories />
       </StyledAppBar>
     </Box>
   );

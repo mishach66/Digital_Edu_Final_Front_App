@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 import { Header } from "./components/header";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchHomePageProducts } from "./redux";
+import { fetchCart, fetchHomePageProducts } from "./redux";
 
 const App = () => {
   const { userData } = useUser();
@@ -16,6 +16,13 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchHomePageProducts());
   }, []);
+
+  useEffect(() => {
+    const userId = userData?._id;
+    if (userId) {
+      dispatch(fetchCart({ userId }));
+    }
+  }, [userData]);
 
   return (
     // <div>

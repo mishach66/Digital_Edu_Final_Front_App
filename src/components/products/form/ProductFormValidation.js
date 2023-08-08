@@ -17,7 +17,7 @@ export const saveProductValidationSchema = yup
         category: yup
             .string()
             .required()
-            .min(6, 'category should be at least 6 characters'),
+            .min(2, 'category should be at least 2 characters'),
         price: yup
             .number()
             .required()

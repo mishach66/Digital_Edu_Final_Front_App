@@ -8,4 +8,17 @@ export {
   saveProduct,
   fetchHomePageProducts,
   deleteProduct,
+  fetchCategoryProducts,
 } from "./productslice";
+
+// cart slice
+export {
+  cartReducer,
+  clearCart,
+  addToCart,
+  removeFromCart,
+
+  // Async actions
+  fetchCart,
+  saveCart,
+} from "./cartSlice";

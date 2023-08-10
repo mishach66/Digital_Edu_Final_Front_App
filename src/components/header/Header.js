@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, styled, AppBar, Toolbar, Button } from "@mui/material";
 import { Link } from "../atoms";
-import { ProductCategories, UserIcon } from "../header";
+import { ProductCategories, UserIcon, SearchBar } from "../header";
 import { CartDrawer } from "./CartDrawer";
 import { BiCart } from "react-icons/bi";
 
@@ -27,6 +27,7 @@ export const Header = () => {
       <StyledAppBar>
         <StyledToolBar>
           <Link to="/">Home</Link>
+          <SearchBar />
           <Box
             sx={{
               display: "flex",

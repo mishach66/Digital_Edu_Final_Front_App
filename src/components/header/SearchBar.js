@@ -54,7 +54,7 @@ export const SearchBar = () => {
               setSearchValue(e.target.value);
             }}
             label="search products"
-            inputProps={{
+            InputProps={{
               ...params.InputProps,
               type: "search",
             }}

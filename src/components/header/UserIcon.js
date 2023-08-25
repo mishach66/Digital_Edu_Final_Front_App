@@ -14,6 +14,7 @@ import { isUserAdmin } from "../../helpers";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/slices";
 import { getUserInitials } from "../../helpers";
+import { setSelectedProduct } from "../../redux";
 
 const StyleddBox = styled(Box)(() => ({
   display: "flex",
@@ -65,7 +66,12 @@ export const UserIcon = () => {
           )}
           {isUserAdmin(userData) && (
             <MenuItem>
-              <Button onClick={() => navigate("/addproduct")}>
+              <Button
+                onClick={() => {
+                  navigate("/products/new");
+                  dispatch(setSelectedProduct(null));
+                }}
+              >
                 Add product
               </Button>
             </MenuItem>
